@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Alti Political Report</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
+
+    <style>
+        body {
+            padding: 70px;
+        }
+
+        .nav {
+            margin-top: 8px;
+        }
+
+        #wrapper {}
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <p>
+                        <img alt="" src="http://www.alticast.co.kr/tmp.2014.06.images/balloon.png" width="20"> THE POLITICLA REPORT </p>
+                </a>
+            </div>
+
+            <ul class="nav nav-tabs navbar-right" style="margin-top:8;">
+                <li role="presentation" class="dropdown active">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-expanded="false"> Daily <span class="caret"></span>
+                </a>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <span>Live</span>
+                    </ul>
+                </li>
+                <li role="presentation"><a href="#">About Data</a></li>
+                <li role="presentation"><a href="#">About SVC</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class='container-fluid' id='warpper' style="width:100%; height:400px;">
+        <div class="row">
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+    <script> //ajax 요청
+     var xhr = new XMLHttpRequest();
+      xhr.onload = function(){
+        if(xhr.status===200){
+          var responseObject = JSON.parse(xhr.responseText);
+          alert(JSON.stringify(responseObject));
+        }
+      };
+
+      xhr.open('POST','json',true);
+      xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+      xhr.send("fname=Henry&lname=Ford");
+    </script>
+</body>
+
+</html>
