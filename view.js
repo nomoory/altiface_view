@@ -1,15 +1,13 @@
-const express = require('express');
-const path = require('path');
-const bodyParser = require('body-parser');
+// Invoke 'strict' JavaScript mode
+'use strict';
+
+// Load the module dependencies
+const express = require('./config/express');
 const fs = require('fs');
+const path = require('path');
+
+// Create a new Express application instance
 const app = express();
-
-app.set('views', path.join(__dirname, 'views'));
-
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-app.use(express.static('public'));
 
 // altiface/reports/ranking/json
 app.post('/ajax', function(req, res) {
@@ -82,7 +80,6 @@ app.get('/altiface/reports/:report/:term', function(req, res) {
     // 스코프 자료에 변화가 생기는 동시에 interpolation 변경 및 css animation 발생
     // 1) animation 발생 트리거를 어떤 이벤트로 하지? 2) 애니메이션은 어떻게 주지?
 });
-
 
 app.listen(3300, function() {
     console.log('port 3300 connected!!');

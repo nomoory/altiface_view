@@ -6,12 +6,12 @@ var config = require('./config'),
 	express = require('express'),
   bodyParser = require('body-parser'),
   errorHandler = require('errorhandler'),
-  querystring = require('querystring');
+  querystring = require('querystring'),
+	path = requre('path');
 
 // Define the Express configuration method
 module.exports = function() {
 	// Create a new Express application instance
-	var app = express();
 
   // Use the 'body-parser' middleware
   //app.use(bodyParser.urlencoded({
@@ -27,6 +27,9 @@ module.exports = function() {
 
 	// Configure static file serving
 	app.use(express.static('./public'));
+
+	// Configure template engine route
+	app.set('views', path.join(__dirname, 'views'));
 
   // Error Handling
   // Handle 404 Errors
