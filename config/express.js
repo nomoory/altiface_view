@@ -2,16 +2,17 @@
 'use strict';
 
 // Load the module dependencies
-var config = require('./config'),
-	express = require('express'),
+var express = require('express'),
   bodyParser = require('body-parser'),
   errorHandler = require('errorhandler'),
   querystring = require('querystring'),
-	path = requre('path');
+	path = require('path');
+
 
 // Define the Express configuration method
 module.exports = function() {
 	// Create a new Express application instance
+	var app = express();
 
   // Use the 'body-parser' middleware
   //app.use(bodyParser.urlencoded({
@@ -20,16 +21,17 @@ module.exports = function() {
   app.use(bodyParser.json());
 
 	// Load the routing files
-	require('../app/routes/recognitioninfo.dbserver.routes.js')(app);
-  require('../app/routes/profiles.dbserver.routes.js')(app);
+	//require('../app/routes/recognitioninfo.dbserver.routes.js')(app);
+  //require('../app/routes/profiles.dbserver.routes.js')(app);
 	require('../app/routes/live.dbserver.routes.js')(app);
-	require('../app/routes/daily.dbserver.routes.js')(app);
+	//require('../app/routes/daily.dbserver.routes.js')(app);
 
 	// Configure static file serving
 	app.use(express.static('./public'));
 
 	// Configure template engine route
-	app.set('views', path.join(__dirname, 'views'));
+	app.set('views', path.join(process.cwd(), 'views'));
+	app.set('view engine', 'ejs');
 
   // Error Handling
   // Handle 404 Errors

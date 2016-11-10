@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Alti Political Report</title>
+    <link rel="icon" href="data:;base64,iVBORw0KGgo=">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
@@ -30,9 +31,10 @@
             clear: both;
         }
     </style>
+
 </head>
 
-<body ng-app="app" ng-controller="MainCtrl">
+<body>
 
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
@@ -58,7 +60,7 @@
     </nav>
 
     <div class='container' id='warpper' style="width:90%;">
-        <div class="row">
+        <div class="row rankers">
             <div class="col-sm-6 col-md-4">
                 <div class="thumbnail rank-1">
                     <img src="#" alt="...">
@@ -80,7 +82,7 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-4">
-                <div class="thumbnail rank-3">
+               <div class="thumbnail rank-3">
                     <img src="#" alt="...">
                     <div class="caption">
                         <h3 class="name"></h3>
@@ -98,58 +100,21 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
     <!-- ajax -->
-    <script>
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                var responseObject = JSON.parse(xhr.responseText);
-                refresh();
-            }
-        };
-
-        xhr.open('POST', 'http://133.130.120.155:3300/ajax', true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhr.send("fname=Henry&lname=Ford");
-    </script>
-
-    <!-- ranker update -->
+    <script src="http://10.70.0.203:3300/js/ajax.js"></script>
     <script>
         var refresh = function() {
-            var xhr2 = new XMLHttpRequest();
-            xhr2.onload = function() {
-                if (xhr2.status === 200) {
-                    var responseObject = JSON.parse(xhr2.responseText);
-                    for (var i = 0; i < 3; i++) {
-                        var name = responseObject.data[i].name;
-                        var total_time = responseObject.data[i].total_time;
-                        var imgUri = responseObject.data[i].uri;
-                        var className = "rank-" + (i + 1);
-                        $("." + className).children("img").attr("src", imgUri);
+            sendXHRRequest();
+        };
 
-                    }
-                }
-            };
-            xhr2.open('GET', 'http://133.130.120.155:3300/refresh', true);
-            xhr2.send();
-        }
-    </script>
-
-    <script>
-        var app = angular.module('app', []);
-
-        app.controller('MainCtrl', function($scope) {
-            $scope.greet = function() {
-                $scope.message = "Hello, ";
-            }
-        });
+        window.onload = function() {
+          refresh();
+        };
     </script>
 
 
-    <!-- ng Modules -->
-    <!-- <script src="http://133.130.120.155:3300/js/mainApp.js"></script> -->
+    <!-- ranker update -->
 
-    <!-- ng Controllers -->
-    <!-- <script src="http://133.130.120.155:3300/js/controllers/mainController.js"></script> -->
+
 </body>
 
 </html>

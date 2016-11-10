@@ -1,36 +1,37 @@
 // Invoke 'strict' JavaScript mode
 'use strict';
-var http = requirt('http');
+var http = require('http');
+var path = require('path');
 var dbserverInfo = require('../../config/dbserver.info');
 
 // require data to db server
 exports.request = function (req, res) {
+  // Against AJAX request
+//  console.log(req.headers["x-requested-with"]);
+  if (req.headers["x-requested-with"] == "XMLHttpRequest") {
+    // Send JSON data request to db server
 
-  // var data = querystring.stringify({
-  //   username: "myname",
-  //   password: " pass"
-  // });
+    // Make option information for request to dbserver
+    var options = {
+      host: dbserverInfo.host,
+      port: dbserverInfo.port,
+      path: '/altiface/reports/ranking/live?start='+req.query.start+'&size='+req.query.size,
+    };
 
-  var options = {
-    host: dbserverInfo.host,
-    port: dbserverInfo.port,
-    path: '/altiface/reports/ranking/live',
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      // 'Content-Length': Buffer.byteLength(data)
-    }
-  };
-
-  var httpreq = http.request(options, function (response) {
-    response.setEncoding('utf8');
-    response.on('data', function (chunk) {
-      console.log("body: " + chunk);
+    http.get(options, function (response) {
+      response.on('data', function (chunk) {
+        console.log("body: " + chunk);
+        res.send(chunk);
+      });
+      response.on('end', function() {
+      })
+    }).on('error', function (e) {
+      console.log("Got error: "+ e.message);
     });
-    response.on('end', function() {
-      res.send('ok');
-    })
-  });
-  httpreq.write(data);
-  httpreq.end();
+  }
+
+  // Against HTTP request
+  else {
+    res.render('index',{"start":req.query.start,"size":req.query.size});
+  }
 };
