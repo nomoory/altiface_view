@@ -1,4 +1,4 @@
-
+// Make second number in data to time
 var secondToTime = function( second ) {
 
     var sec = second%60;
@@ -66,9 +66,10 @@ var sendXHRRequest = function() {
   console.log("ajax.js | sendXHRRequest called");
   // Set AJAX request for live report
   xhrLive.open('GET', getXHRRequestUriForLive(), true);
+
+  // set headers for dbserver recognize it as ajax request
   xhrLive.setRequestHeader('Content-Type', 'application/json');
   xhrLive.setRequestHeader("X-Requested-With", "XMLHttpRequest");
-
 
   // Send AJAX request
   xhrLive.send();
@@ -79,8 +80,9 @@ xhrLive.onload = function() {
   if(xhrLive.status ===200){
     var responseJson = JSON.parse(xhrLive.responseText);
     console.log(responseJson);
-
+    
     // Make template with responsed data
+    //TODO : Should make it a component
 
     for (var i = 0; i < 3; i++) {
         var name = (responseJson.data[i].person_id).split('_')[2];
