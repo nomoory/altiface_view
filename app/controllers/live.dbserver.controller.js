@@ -32,6 +32,7 @@ exports.request = function (req, res) {
 
   // Against HTTP request
   else {
+    console.log("http request is called");
     res.render('index',{"start":req.query.start,"size":req.query.size});
   }
 };

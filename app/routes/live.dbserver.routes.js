@@ -3,6 +3,7 @@
 
 // Define the routes module' method
 module.exports = function(app) {
+    console.log("live.db.server.routes | ");
 	// Load the 'live' controller
 	var live = require('../controllers/live.dbserver.controller');
 

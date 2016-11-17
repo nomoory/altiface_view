@@ -1,4 +1,4 @@
-// Make second number in data to time
+// Change second(number) to time
 var secondToTime = function( second ) {
 
     var sec = second%60;
@@ -55,7 +55,7 @@ var getQuerystringAsObject = function() {
 var getXHRRequestUriForLive = function() {
   console.log("ajax.js | getXHRRequestUriForLive called");
   var queryObject = getQuerystringAsObject();
-  var uri ='http://10.70.0.203:3300/altiface/reports/ranking/live' + '?start=' + queryObject['start'] + '&size=' +queryObject['size'];
+  var uri ='http://125.131.193.229:3300/altiface/reports/ranking/live' + '?start=' + queryObject['start'] + '&size=' +queryObject['size'];
   return uri;
 }
 
